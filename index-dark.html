@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotleta — Ресторан авторської кухні</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        header {
+            background: linear-gradient(to right, #2c2c2c, #1a1a1a);
+            text-align: center;
+            padding: 80px 20px;
+        }
+        header h1 {
+            font-size: 48px;
+            margin: 0;
+            color: #e0b97e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        header p {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #d1d1d1;
+        }
+        section {
+            max-width: 1000px;
+            margin: auto;
+            padding: 60px 20px;
+            animation: fadeIn 1.5s ease;
+        }
+        h2 {
+            color: #e0b97e;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .menu {
+            display: grid;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .dish {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+        .dish:hover {
+            transform: scale(1.02);
+        }
+        .dish h3 {
+            margin-top: 0;
+            color: #ffdf91;
+        }
+        .dish p {
+            color: #ccc;
+        }
+        .dish img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #1a1a1a;
+            color: #888;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Kotleta</h1>
+    <p>Авторські котлети з вишуканою подачею</p>
+</header>
+
+<section>
+    <h2>Меню</h2>
+    <div class="menu">
+        <div class="dish">
+            <h3>Котлета по-київськи</h3>
+            <p>Ніжне куряче філе з вершковим маслом всередині, паніровка з золотистою скоринкою.</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Chicken_Kiev.jpg/1024px-Chicken_Kiev.jpg" alt="Котлета по-київськи">
+        </div>
+        <div class="dish">
+            <h3>Котлета з телятини</h3>
+            <p>Соковита котлета з добірної телятини з грибним соусом і печеною картоплею.</p>
+        </div>
+        <div class="dish">
+            <h3>Гарнір з овочів-гриль</h3>
+            <p>Овочі, обсмажені на відкритому вогні з ароматом трав та оливковою олією.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Контакти</h2>
+    <p>Адреса: м. Київ, вул. Смачна, 5</p>
+    <p>Телефон: +380 67 123 45 67</p>
+    <p>Email: info@kotleta.com.ua</p>
+</section>
+
+<footer>
+    <p>&copy; 2025 Ресторан "Kotleta". Всі права захищені.</p>
+</footer>
+
+</body>
+</html>
