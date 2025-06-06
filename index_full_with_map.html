@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kotleta — смачно, як у мами</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5efe6;
+      color: #2d1b1b;
+    }
+    header {
+      background-color: #1a0f0f;
+      padding: 30px 20px;
+      text-align: center;
+      color: #f7c26b;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 42px;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+    }
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #b36200;
+      margin-bottom: 10px;
+    }
+    .menu, .cart {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .dish, .cart-item {
+      background: #fff4e6;
+      border: 1px solid #e3d2ba;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .dish h3, .cart-item h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #7a3b00;
+    }
+    .dish p, .cart-item p {
+      margin: 4px 0 8px;
+      font-size: 14px;
+      color: #5a3b1f;
+    }
+    .dish button, .cart-item button {
+      background: #b36200;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    form {
+      background: #fffdf9;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    form button {
+      background: #b36200;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    footer {
+      background-color: #1a0f0f;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<style>
+  #floating-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 280px;
+    max-height: 60vh;
+    overflow-y: auto;
+    background: #fff4e6;
+    border: 2px solid #e3d2ba;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1000;
+  }
+  #floating-cart h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #7a3b00;
+  }
+  .floating-cart-item {
+    font-size: 14px;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #d2bfa3;
+    padding-bottom: 4px;
+  }
+  .floating-cart-item button {
+    margin-left: 5px;
+    padding: 2px 6px;
+    font-size: 12px;
+    border: none;
+    background-color: #b36200;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .floating-cart-total {
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10px;
+    color: #5a3b1f;
+  }
+</style>
+<div id="floating-cart">
+  <h3>🛒 Ваше замовлення</h3>
+  <div id="cart-items"></div>
+  <div class="floating-cart-total" id="cart-total"></div>
+</div>
+
+
+<header>
+  <h1>Kotleta</h1>
+  <p>смачно, як у мами</p>
+  <p>Швидка доставка смачних котлет до вашого столу</p>
+</header>
+
+<!-- Меню з розділами й іконками -->
+
+<section>
+  <h2>🍽 Котлети</h2>
+  <div class="menu">
+    <div class="dish"><h3>Котлета «Як у мами»</h3><p>Фарш свинина + яловичина. 180 г — 160 грн</p><button onclick="addToCart('Котлета «Як у мами»', 160)">Додати до кошика</button></div>
+    <div class="dish"><h3>Котлета «По-Київськи»</h3><p>Куряче філе, вершкове масло, кріп, панірувальні сухарі. 200 г — 220 грн</p><button onclick="addToCart('Котлета «По-Київськи»', 220)">Додати до кошика</button></div>
+    <div class="dish"><h3>Котлета «Гордон Блю»</h3><p>Куряче філе, сир чеддер, вершкове масло, панірувальні сухарі. 220 г — 220 грн</p><button onclick="addToCart('Котлета «Гордон Блю»', 220)">Додати до кошика</button></div>
+    <div class="dish"><h3>Котлета парова з індички</h3><p>З вівсяними пластівцями (дієтична). 180 г — 180 грн</p><button onclick="addToCart('Котлета парова з індички', 180)">Додати до кошика</button></div>
+    <div class="dish"><h3>Котлета рибна «По-Португальськи»</h3><p>Філе білої та червоної риби. 180 г — 220 грн</p><button onclick="addToCart('Котлета рибна «По-Португальськи»', 220)">Додати до кошика</button></div>
+    <div class="dish"><h3>Котлета «Боварський шніцель»</h3><p>Свинна котлета з цільного шматка м’яса. 200 г — 220 грн</p><button onclick="addToCart('Котлета «Боварський шніцель»', 220)">Додати до кошика</button></div>
+  </div>
+</section>
+
+<section>
+  <h2>🍔 Бургери з котлетою на грилі</h2>
+  <div class="menu">
+    <div class="dish"><h3>Бургер «Мама-Шеф»</h3><p>Велика котлета з яловичини, бекон, томати, сир, салат, соус. 400 г — 380 грн</p><button onclick="addToCart('Бургер «Мама-Шеф»', 380)">Додати до кошика</button></div>
+    <div class="dish"><h3>Бургер «Блек Джек»</h3><p>Котлета з яловичини в чорній булочці, соус Jack Daniel’s. 320 г — 380 грн</p><button onclick="addToCart('Бургер «Блек Джек»', 380)">Додати до кошика</button></div>
+    <div class="dish"><h3>Бургер «Джусі-Люсі»</h3><p>Дві котлети, подвійний сир чеддер, цибуля, огірок, салат. 350 г — 370 грн</p><button onclick="addToCart('Бургер «Джусі-Люсі»', 370)">Додати до кошика</button></div>
+    <div class="dish"><h3>Бургер «Біг чікен»</h3><p>Цільне куряче філе, бекон, сир, салат. 400 г — 320 грн</p><button onclick="addToCart('Бургер «Біг чікен»', 320)">Додати до кошика</button></div>
+  </div>
+</section>
+
+<section>
+  <h2>🥗 Додатки</h2>
+  <div class="menu">
+    <div class="dish"><h3>Картопля фрі</h3><p>150 г — 110 грн</p><button onclick="addToCart('Картопля фрі', 110)">Додати до кошика</button></div>
+    <div class="dish"><h3>Крокети з сиром</h3><p>200 г — 120 грн</p><button onclick="addToCart('Крокети з сиром', 120)">Додати до кошика</button></div>
+    <div class="dish"><h3>Картопля пюре</h3><p>150 г — 120 грн</p><button onclick="addToCart('Картопля пюре', 120)">Додати до кошика</button></div>
+    <div class="dish"><h3>Спаржева квасоля з часником</h3><p>250 г — 130 грн</p><button onclick="addToCart('Спаржева квасоля з часником', 130)">Додати до кошика</button></div>
+    <div class="dish"><h3>Кукурудза на грилі</h3><p>200 г — 99 грн</p><button onclick="addToCart('Кукурудза на грилі', 99)">Додати до кошика</button></div>
+    <div class="dish"><h3>Овочі гриль</h3><p>250 г — 180 грн</p><button onclick="addToCart('Овочі гриль', 180)">Додати до кошика</button></div>
+  </div>
+</section>
+
+<section>
+  <h2>🥣 Соуси</h2>
+  <div class="menu">
+    <div class="dish"><h3>Часниковий</h3><p>50 г — 35 грн</p><button onclick="addToCart('Часниковий соус', 35)">Додати до кошика</button></div>
+    <div class="dish"><h3>Барбекю</h3><p>50 г — 35 грн</p><button onclick="addToCart('Соус Барбекю', 35)">Додати до кошика</button></div>
+    <div class="dish"><h3>Сирно-вершковий</h3><p>50 г — 35 грн</p><button onclick="addToCart('Сирно-вершковий соус', 35)">Додати до кошика</button></div>
+  </div>
+</section>
+
+<section>
+  <h2>🍹 Напої</h2>
+  <div class="menu">
+    <div class="dish"><h3>Домашні лимонади (1 л)</h3><p>Цитрусовий / Манго-маракуя / Лічі-кокос / Ягідний мікс — 200 грн</p><button onclick="addToCart('Лимонад домашній', 200)">Додати до кошика</button></div>
+  </div>
+</section>
+
+<section>
+  <h2>📍 Контакти</h2>
+  <p style="text-align:center;">
+    Адреса: м. Київ, вул. Степана Рудницького 19/14<br/>
+    Телефон: +380682406688<br/>
+    Email: kotleta.zakaz@gmail.com
+  </p>
+</section>
+
+
+<section>
+  <h2>🛒 Кошик</h2>
+  <div class="cart" id="cart"></div>
+  <p id="total" style="text-align:center; font-weight:bold;"></p>
+</section>
+
+<section>
+  <h2>Оформлення замовлення</h2>
+  <form onsubmit="submitOrder(event)">
+    <input type="text" id="name" placeholder="Ваше ім’я" required />
+    <input type="tel" id="phone" placeholder="Телефон" required />
+    <input type="text" id="address" placeholder="Адреса доставки" />
+    <select id="delivery" required>
+      <option value="доставка">Доставка</option>
+      <option value="самовивіз">Самовивіз</option>
+    </select>
+    <select id="payment" required>
+      <option value="liqpay">LiqPay</option>
+      <option value="cash">Готівка</option>
+    </select>
+    <textarea id="comment" rows="3" placeholder="Коментар до замовлення..."></textarea>
+    <button type="submit">Надіслати замовлення</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Kotleta | +380682406688 | kotleta.zakaz@gmail.com
+
+<section>
+  <h2>📍 Як нас знайти</h2>
+  <div style="text-align:center;">
+    <img src="map_kotleta.png" alt="Карта з позначкою Kotleta" style="max-width:100%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2);" />
+    <p style="font-size:16px; margin-top:8px;">
+      Заклад <strong>KOTLETA</strong> знаходиться біля <strong>Теннесі Стейк Хаус</strong>.<br>
+      Самовивіз: вул. Степана Рудницького 19/14, прим. 711, Київ
+    </p>
+  </div>
+</section>
+
+</footer>
+
+
+
+<script>
+  const cart = [];
+  function addToCart(name, price) {
+    const item = cart.find(i => i.name === name);
+    if (item) item.qty++;
+    else cart.push({ name, price, qty: 1 });
+    renderCart();
+  }
+  function changeQty(i, d) {
+    cart[i].qty += d;
+    if (cart[i].qty <= 0) cart.splice(i, 1);
+    renderCart();
+  }
+  function renderCart() {
+    const cartBox = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    cartBox.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, i) => {
+      total += item.price * item.qty;
+      cartBox.innerHTML += `
+        <div class="floating-cart-item">
+          ${item.name} ×${item.qty} — ${item.price * item.qty} грн
+          <button onclick="changeQty(${i}, 1)">+</button>
+          <button onclick="changeQty(${i}, -1)">−</button>
+        </div>`;
+    });
+    cartTotal.textContent = total ? `Сума: ${total} грн` : "Кошик порожній";
+  }
+
+  function submitOrder(e) {
+    e.preventDefault();
+    const data = {
+      name: document.getElementById("name").value,
+      phone: document.getElementById("phone").value,
+      address: document.getElementById("address").value,
+      delivery: document.getElementById("delivery").value,
+      payment: document.getElementById("payment").value,
+      comment: document.getElementById("comment").value,
+      items: cart.map(i => `${i.name} ×${i.qty}`).join(', ')
+    };
+    alert(`Замовлення оформлено!
+Ім’я: ${data.name}
+Телефон: ${data.phone}
+Адреса: ${data.address}
+Доставка: ${data.delivery}
+Оплата: ${data.payment}
+Коментар: ${data.comment}
+Страви: ${data.items}`);
+  }
+</script>
+
+
+
+</body>
+</html>
